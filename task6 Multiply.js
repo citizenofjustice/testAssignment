@@ -18,17 +18,29 @@ const multiplicationTable = (number) => {
     for (let j = 0; j < number; j++) {
       arr[i][j] = (i + 1) * (j + 1);
     }
+  }
 
-    // создаем строку для вывода
+  // находим длину самого большого числа
+  const maxSpace = arr[number - 1][number - 1].toString().length + 1;
+
+  // итерируем по массиву снова
+  for (let i = 0; i < number; i++) {
+    // создаем строку в которую будем записывать ряд таблицы
     let row = "";
 
-    // каждый элемент массива заносим в стороку
-    arr[i].forEach((element) => (row += element + " "));
+    for (let j = 0; j < number; j++) {
+      // вычисляем сколько нужно пробелов текущему элементу массива
+      const space = maxSpace - arr[i][j].toString().length;
 
-    // выводим таблицу умножения в консоль
+      // дополняем строку элементом массива с нужным количеством пробелов
+      row += " ".repeat(space) + arr[i][j];
+    }
+
+    // выводим таблицу построчно
     console.log(row);
   }
-  return arr;
+  // альтернативный вывод в консоль таблицей
+  console.table(arr);
 };
 
 multiplicationTable(10);
